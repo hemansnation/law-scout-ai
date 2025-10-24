@@ -1,12 +1,12 @@
 "use client";
 
-import { useChat } from "@/hooks/useChat";
-import { DashboardSidebar } from "@/components/layout/DashboardSidebar";
-import { ChatArea, ChatHeader, ChatInput } from "@/components/features/chat";
+import { useChat } from "@/app/dashboard/hooks/useChat";
+import { DashboardSidebar } from "@/app/dashboard/components/DashboardSidebar";
+import { ChatArea, ChatHeader, ChatInput } from "@/app/dashboard/components/chat";
 
 /**
- * Dashboard Page - Solo compone componentes y maneja el estado global del chat
- * Responsabilidad: Orquestación de la UI del dashboard de chat legal
+ * Dashboard Page - Only composes components and manages the global chat state
+ * Responsibility: Orchestrating the UI of the legal chat dashboard
  */
 export default function Dashboard() {
   const {

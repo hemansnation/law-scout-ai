@@ -5,8 +5,8 @@ import { LandingHeader, HeroSection, FeaturesSection } from "@/app/home/componen
 import { LANDING_FEATURES, LANDING_STATS } from "@/app/home/constants";
 
 /**
- * Home Page - Landing page para Law Scout AI
- * Responsabilidad: Presentar el producto y dirigir usuarios al registro/login
+ * Home Page - Landing page for Law Scout AI
+ * Responsibility: Presenting the product and directing users to register/login
  */
 export default function Home() {
   const router = useRouter();
