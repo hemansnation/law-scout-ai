@@ -1,16 +1,11 @@
-/node_modules
-
-/.venv
-/__pycache__/
-*.pyc
-
-/.vscode/
-
+# OS
 .DS_Store
 Thumbs.db
 
+# Editors
+.vscode/
+.idea/
+
+# Env files (if shared)
 .env
 *.env.local
-
-/build
-/dist

@@ -1,21 +1,36 @@
-version: "3.9"
-
 services:
+  frontend:
+    image: node:18-alpine
+    container_name: nextjs_app
+    working_dir: /app
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_BACKEND_URL: "http://localhost:${BACKEND_PORT}"
+      NEXT_TELEMETRY_DISABLED: 1
+      CI: "true"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    command: sh -c "corepack enable pnpm && pnpm install --no-frozen-lockfile && pnpm dev"
+    depends_on:
+      - backend
+
+
   backend:
-    build: ./backend/services/api
+    build: ./backend
     container_name: fastapi_app
-    command: uvicorn app.main:app --host 0.0.0.0 --port ${BACKEND_PORT} --reload
     ports:
       - "${BACKEND_PORT}:${BACKEND_PORT}"
     volumes:
-      - ./backend/services/api:/app
+      - ./backend:/app
     env_file:
       - .env
     depends_on:
       - db
 
   db:
-    image: postgres:15
+    image: pgvector/pgvector:pg16
     container_name: fastapi_db
     restart: always
     environment:
