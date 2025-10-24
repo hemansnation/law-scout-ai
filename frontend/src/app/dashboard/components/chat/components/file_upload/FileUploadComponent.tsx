@@ -92,7 +92,7 @@ export function FileUploadComponent({
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 max-h-[70vh] overflow-y-auto px-1 pb-2">
   {/* Show errors if any */}
       {uploadErrors.length > 0 && (
         <div className="space-y-2">
@@ -182,6 +182,7 @@ export function FileUploadComponent({
           </div>
         </div>
       )}
+      
     </div>
   );
 }

@@ -34,7 +34,7 @@ export function DashboardSidebar({ className }: DashboardSidebarProps) {
       <div className="p-4">
         <Button className="w-full" variant="outline">
           <Plus className="w-4 h-4 mr-2" />
-          New Chat
+          New Chat / OOS
         </Button>
       </div>
 
@@ -52,11 +52,11 @@ export function DashboardSidebar({ className }: DashboardSidebarProps) {
       <div className="p-4 border-t border-gray-200 space-y-2">
         <Button variant="ghost" className="w-full justify-start">
           <Settings className="w-4 h-4 mr-2" />
-          Settings
+          Settings / OOS
         </Button>
         <Button variant="ghost" className="w-full justify-start">
           <HelpCircle className="w-4 h-4 mr-2" />
-          Help & Support
+          Help & Support / OOS
         </Button>
         
         <Separator className="my-2" />

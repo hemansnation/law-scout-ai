@@ -1,4 +1,22 @@
 services:
+  frontend:
+    image: node:18-alpine
+    container_name: nextjs_app
+    working_dir: /app
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_BACKEND_URL: "http://localhost:${BACKEND_PORT}"
+      NEXT_TELEMETRY_DISABLED: 1
+      CI: "true"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    command: sh -c "corepack enable pnpm && pnpm install --no-frozen-lockfile && pnpm dev"
+    depends_on:
+      - backend
+
+
   backend:
     build: ./backend
     container_name: fastapi_app
@@ -6,8 +24,6 @@ services:
       - "${BACKEND_PORT}:${BACKEND_PORT}"
     volumes:
       - ./backend:/app
-      
-
     env_file:
       - .env
     depends_on:

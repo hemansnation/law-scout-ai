@@ -26,6 +26,6 @@ def init_db():
     import app.modules.users.models
     import app.modules.AI.pipeline.embeddings.models
     
-    Base.metadata.drop_all(bind=engine)
+    #Base.metadata.drop_all(bind=engine)
     Base.metadata.create_all(bind=engine)
     

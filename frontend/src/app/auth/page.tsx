@@ -21,12 +21,12 @@ export default function AuthPage() {
     
     try {
        const response = await axios.post(`${settings.backendUrl}/auth/login`, { email, password })
-       const jwt = response.data.token
+       const jwt = response.data.access_token
+       console.log("Received JWT:", jwt)
        localStorage.setItem("token", jwt)
       // Redirect to dashboard
-      router.push("/dashboard")
-
-        console.log("Login successful")
+       router.push("/dashboard")
+       console.log("Login successful")
     } catch (err) {
       const error = err as AxiosError
       if (error.response && error.response.status === 401) {  
@@ -63,14 +63,20 @@ export default function AuthPage() {
         {isLogin ? (
           <LoginForm
             onLogin={handleLogin}
-            onRegisterClick={() => setIsLogin(false)}
+            onRegisterClick={() => {
+              setError("");  
+              setIsLogin(false);
+            }}
             isLoading={isLoading}
             error={error}
           />
         ) : (
           <RegisterForm
             onRegister={handleRegister}
-            onLoginClick={() => setIsLogin(true)}
+            onLoginClick={() => {  
+              setError("");      
+              setIsLogin(true);
+            }}
             isLoading={isLoading}
             error={error}
           />

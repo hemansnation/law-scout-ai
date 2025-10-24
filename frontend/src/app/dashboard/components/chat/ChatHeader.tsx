@@ -42,7 +42,7 @@ export function ChatHeader({ selectedFiles, onFilesSelected, onFileRemoved }: Ch
           
           <Button variant="outline" size="sm">
             <Upload className="w-4 h-4 mr-2" />
-            Quick Upload
+            Quick Upload/OOS
           </Button>
         </div>
       </div>

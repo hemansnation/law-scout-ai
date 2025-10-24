@@ -31,6 +31,7 @@ def get_answer_from_query(request: QueryRequest):
     answer = generate_answer_from_db(request.query)
     return {"answer": answer}
 
+import traceback
 
 @router.post("/upload_documents")
 async def upload_documents(
@@ -42,4 +43,5 @@ async def upload_documents(
         gen_and_store_embeddings(paths)
         return {"message": "Files uploaded and ingested successfully."}
     except Exception as e:
+        traceback.print_exc()  # Logs full traceback to backend
         raise HTTPException(status_code=500, detail=f"Upload failed: {e}")

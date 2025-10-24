@@ -3,12 +3,28 @@
 import { useChat } from "@/app/dashboard/hooks/useChat";
 import { DashboardSidebar } from "@/app/dashboard/components/DashboardSidebar";
 import { ChatArea, ChatHeader, ChatInput } from "@/app/dashboard/components/chat";
+import { use, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
-/**
- * Dashboard Page - Only composes components and manages the global chat state
- * Responsibility: Orchestrating the UI of the legal chat dashboard
- */
 export default function Dashboard() {
+  const router = useRouter();
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    fetch("http://localhost:8000/auth/me", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
+        if (response.status === 401) {
+          router.replace("/auth");
+        }
+      })
+      .catch(() => {
+        router.replace("/auth");
+      });
+  }, [router]);
+
   const {
     messages,
     isTyping,
@@ -39,10 +55,12 @@ export default function Dashboard() {
         />
 
         {/* Messages Area */}
-        <ChatArea
-          messages={messages}
-          isTyping={isTyping}
-        />
+        <div className="flex-1 overflow-y-auto">
+          <ChatArea
+            messages={messages}
+            isTyping={isTyping}
+          />
+        </div>
 
         {/* Input Area */}
         <ChatInput

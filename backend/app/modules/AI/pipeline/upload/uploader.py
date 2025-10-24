@@ -3,8 +3,7 @@ from typing import List, Optional
 from app.modules.AI.pipeline.upload.utils import ensure_dir, save_bytes_to_file
 from pathlib import Path
 
-BASE_DIR = Path(__file__).resolve().parent  # -> /app/app/modules/AI
-folder_path = BASE_DIR / "documents" / "synthetic_best"
+BASE_DIR = Path(__file__).resolve().parent.parent.parent  # -> /app/app/modules/AI
 uploads_folder = BASE_DIR / "documents" / "uploaded"
 
 async def upload_files (files: List[UploadFile], fileNames: Optional[List[str]] = None):

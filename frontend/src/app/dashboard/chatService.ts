@@ -1,5 +1,6 @@
 import { Message, FileAttachment } from "@/app/dashboard/types";
 import { CHAT_CONSTANTS } from '@/app/dashboard/constants';
+import { settings } from "@/lib/settings";
 
 export class ChatService {
   // Generate AI response (now sends to real backend)
@@ -11,7 +12,7 @@ export class ChatService {
       }
 
       // If there are no files, just send the message
-      const response = await fetch('http://localhost:8000/ai/rag_from_query', {
+      const response = await fetch(`${settings.backendUrl}/ai/rag_from_query`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -106,7 +107,7 @@ export class ChatService {
     });
 
     try {
-      const response = await fetch('http://localhost:8000/ai/upload_documents', {
+      const response = await fetch(`${settings.backendUrl}/ai/upload_documents`, {
         method: 'POST',
         body: formData,
       });
@@ -131,7 +132,7 @@ export class ChatService {
       }
 
       // Send message to backend for RAG processing
-      const response = await fetch('http://localhost:8000/ai/rag_from_query', {
+      const response = await fetch(`${settings.backendUrl}/ai/rag_from_query`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -146,7 +147,7 @@ export class ChatService {
       }
 
       const data = await response.json();
-      return data.answer || "Could not process the query.";
+      return data.answer.answer || "Could not process the query.";
     } catch (error) {
       console.error('Error sending message with files:', error);
       throw error;
